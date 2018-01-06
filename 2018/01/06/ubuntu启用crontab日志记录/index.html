@@ -83,16 +83,16 @@
 
 
 
-<meta name="description" content="使用到的软件：nginx安装nginx：sudo apt-get install nginx启动nginx：sudo /etc/init.d/nginx start配置nginx：1）备份配置文件cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak2）修改配置文件sudo vim /etc/ngin">
+<meta name="description" content="ubuntu启用crontab日志记录crontab日志位置        /var/log目录下的cron.log若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启1）修改rsyslog文件vim /etc/rsyslog.d/50-default.conf, 把#cron.* 前面的#去掉即可 2）重启rsyslog服务    service rsyslog restart3)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nginx反代墙外网站">
-<meta property="og:url" content="http://yoursite.com/2018/01/06/nginx反代/index.html">
+<meta property="og:title" content="将南">
+<meta property="og:url" content="http://yoursite.com/2018/01/06/ubuntu启用crontab日志记录/index.html">
 <meta property="og:site_name" content="将南">
-<meta property="og:description" content="使用到的软件：nginx安装nginx：sudo apt-get install nginx启动nginx：sudo /etc/init.d/nginx start配置nginx：1）备份配置文件cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak2）修改配置文件sudo vim /etc/ngin">
-<meta property="og:updated_time" content="2018-01-05T16:30:59.550Z">
+<meta property="og:description" content="ubuntu启用crontab日志记录crontab日志位置        /var/log目录下的cron.log若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启1）修改rsyslog文件vim /etc/rsyslog.d/50-default.conf, 把#cron.* 前面的#去掉即可 2）重启rsyslog服务    service rsyslog restart3)">
+<meta property="og:updated_time" content="2018-01-06T11:55:04.156Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nginx反代墙外网站">
-<meta name="twitter:description" content="使用到的软件：nginx安装nginx：sudo apt-get install nginx启动nginx：sudo /etc/init.d/nginx start配置nginx：1）备份配置文件cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak2）修改配置文件sudo vim /etc/ngin">
+<meta name="twitter:title" content="将南">
+<meta name="twitter:description" content="ubuntu启用crontab日志记录crontab日志位置        /var/log目录下的cron.log若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启1）修改rsyslog文件vim /etc/rsyslog.d/50-default.conf, 把#cron.* 前面的#去掉即可 2）重启rsyslog服务    service rsyslog restart3)">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/06/nginx反代/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/06/ubuntu启用crontab日志记录/"/>
 
 
 
 
 
-  <title>Nginx反代墙外网站 | 将南</title>
+  <title> | 将南</title>
   
 
 
@@ -235,7 +235,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/06/nginx反代/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/06/ubuntu启用crontab日志记录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="将南">
@@ -252,7 +252,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Nginx反代墙外网站</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -264,7 +264,7 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-06T00:25:31+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-06T19:49:52+08:00">
                 2018-01-06
               </time>
             
@@ -302,10 +302,9 @@
       
 
       
-        <h3 id="使用到的软件：nginx"><a href="#使用到的软件：nginx" class="headerlink" title="使用到的软件：nginx"></a>使用到的软件：nginx</h3><h4 id="安装nginx：sudo-apt-get-install-nginx"><a href="#安装nginx：sudo-apt-get-install-nginx" class="headerlink" title="安装nginx：sudo apt-get install nginx"></a>安装nginx：<code>sudo apt-get install nginx</code></h4><h4 id="启动nginx：sudo-etc-init-d-nginx-start"><a href="#启动nginx：sudo-etc-init-d-nginx-start" class="headerlink" title="启动nginx：sudo /etc/init.d/nginx start"></a>启动nginx：<code>sudo /etc/init.d/nginx start</code></h4><h4 id="配置nginx："><a href="#配置nginx：" class="headerlink" title="配置nginx："></a>配置nginx：</h4><p>1）备份配置文件<br><code>cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak</code><br>2）修改配置文件<br><code>sudo vim /etc/nginx/sites-available/default</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen 80;</span><br><span class="line">        server_name xxx.com; # 外部地址</span><br><span class="line"> </span><br><span class="line">        location / &#123;</span><br><span class="line">                proxy_pass http://127.0.0.1:8000; #注意端口</span><br><span class="line">                proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">	        	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">		        proxy_pass http://www.xxx.com; #想要反代的网址</span><br><span class="line">		        proxy_redirect off;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
-<p>3）检查nginx配置：<code>nginx -t</code>,若出现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nginx: the configuration file /etc/nginx/nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file /etc/nginx/nginx.conf test is successful</span><br></pre></td></tr></table></figure></p>
-<p>就表示配置成功</p>
-<p>4）重启nginx：<code>sudo service nginx restart</code></p>
+        <hr>
+<h2 id="ubuntu启用crontab日志记录"><a href="#ubuntu启用crontab日志记录" class="headerlink" title="ubuntu启用crontab日志记录"></a>ubuntu启用crontab日志记录</h2><h3 id="crontab日志位置-var-log目录下的cron-log"><a href="#crontab日志位置-var-log目录下的cron-log" class="headerlink" title="crontab日志位置        /var/log目录下的cron.log"></a>crontab日志位置        <code>/var/log</code>目录下的cron.log</h3><h2 id="若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启"><a href="#若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启" class="headerlink" title="若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启"></a>若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启</h2><h4 id="1）修改rsyslog文件"><a href="#1）修改rsyslog文件" class="headerlink" title="1）修改rsyslog文件"></a>1）修改rsyslog文件</h4><p><code>vim /etc/rsyslog.d/50-default.conf</code>, 把<code>#cron.*</code> 前面的#去掉即可</p>
+<h4 id="2）重启rsyslog服务-service-rsyslog-restart"><a href="#2）重启rsyslog服务-service-rsyslog-restart" class="headerlink" title="2）重启rsyslog服务    service rsyslog restart"></a>2）重启rsyslog服务    <code>service rsyslog restart</code></h4><h4 id="3-重启cron服务-service-cron-restart"><a href="#3-重启cron服务-service-cron-restart" class="headerlink" title="3) 重启cron服务       service cron restart"></a>3) 重启cron服务       <code>service cron restart</code></h4><p>这样就可以在<code>/var/log</code>目录下生成cron.log文件。</p>
 
       
     </div>
@@ -330,8 +329,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/23/flask_gunicorn_supervisor/" rel="next" title="Flask+gunicorn+supervisor+nginx快速部署web应用">
-                <i class="fa fa-chevron-left"></i> Flask+gunicorn+supervisor+nginx快速部署web应用
+              <a href="/2018/01/06/nginx反代/" rel="next" title="Nginx反代墙外网站">
+                <i class="fa fa-chevron-left"></i> Nginx反代墙外网站
               </a>
             
           </div>
@@ -339,10 +338,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/06/ubuntu启用crontab日志记录/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -458,7 +453,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用到的软件：nginx"><span class="nav-number">1.</span> <span class="nav-text">使用到的软件：nginx</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装nginx：sudo-apt-get-install-nginx"><span class="nav-number">1.1.</span> <span class="nav-text">安装nginx：sudo apt-get install nginx</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动nginx：sudo-etc-init-d-nginx-start"><span class="nav-number">1.2.</span> <span class="nav-text">启动nginx：sudo /etc/init.d/nginx start</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置nginx："><span class="nav-number">1.3.</span> <span class="nav-text">配置nginx：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ubuntu启用crontab日志记录"><span class="nav-number">1.</span> <span class="nav-text">ubuntu启用crontab日志记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#crontab日志位置-var-log目录下的cron-log"><span class="nav-number">1.1.</span> <span class="nav-text">crontab日志位置        /var/log目录下的cron.log</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启"><span class="nav-number">2.</span> <span class="nav-text">若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1）修改rsyslog文件"><span class="nav-number">2.0.1.</span> <span class="nav-text">1）修改rsyslog文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2）重启rsyslog服务-service-rsyslog-restart"><span class="nav-number">2.0.2.</span> <span class="nav-text">2）重启rsyslog服务    service rsyslog restart</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-重启cron服务-service-cron-restart"><span class="nav-number">2.0.3.</span> <span class="nav-text">3) 重启cron服务       service cron restart</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
