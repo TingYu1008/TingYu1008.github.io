@@ -251,7 +251,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/06/ubuntu启用crontab日志记录/" itemprop="url">Unbenannt</a></h1>
+                <a class="post-title-link" href="/2018/01/06/ubuntu启用crontab日志记录/" itemprop="url">Ubuntu启用crontab日志记录</a></h1>
         
 
         <div class="post-meta">
@@ -303,10 +303,10 @@
       
         
           
+          crontab日志位置        /var/log目录下的cron.log若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启1）修改rsyslog文件vim /etc/rsyslog.d/50-default.conf, 把#cron.* 前面的#去掉即可
+2）重启rsyslog服务    service rsyslog restart3) 重启cron服务       service cron restart这样就可以在/var/log目录下生成cron.log文件。
+
           
-ubuntu启用crontab日志记录crontab日志位置        /var/log目录下的cron.log若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启1）修改rsyslog文件vim /etc/rsyslog.d/50-default.conf, 把#cron.* 前面的#去掉即可
-2）重启rsyslog服务    service rsyslog restart3) 重启cron服务       service cron restart这样就可以在/var/log
-          ...
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/01/06/ubuntu启用crontab日志记录/#more" rel="contents">

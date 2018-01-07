@@ -83,16 +83,16 @@
 
 
 
-<meta name="description" content="ubuntu启用crontab日志记录crontab日志位置        /var/log目录下的cron.log若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启1）修改rsyslog文件vim /etc/rsyslog.d/50-default.conf, 把#cron.* 前面的#去掉即可 2）重启rsyslog服务    service rsyslog restart3)">
+<meta name="description" content="crontab日志位置        /var/log目录下的cron.log若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启1）修改rsyslog文件vim /etc/rsyslog.d/50-default.conf, 把#cron.* 前面的#去掉即可 2）重启rsyslog服务    service rsyslog restart3) 重启cron服务       serv">
 <meta property="og:type" content="article">
-<meta property="og:title" content="将南">
+<meta property="og:title" content="Ubuntu启用crontab日志记录">
 <meta property="og:url" content="http://yoursite.com/2018/01/06/ubuntu启用crontab日志记录/index.html">
 <meta property="og:site_name" content="将南">
-<meta property="og:description" content="ubuntu启用crontab日志记录crontab日志位置        /var/log目录下的cron.log若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启1）修改rsyslog文件vim /etc/rsyslog.d/50-default.conf, 把#cron.* 前面的#去掉即可 2）重启rsyslog服务    service rsyslog restart3)">
-<meta property="og:updated_time" content="2018-01-06T11:55:04.156Z">
+<meta property="og:description" content="crontab日志位置        /var/log目录下的cron.log若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启1）修改rsyslog文件vim /etc/rsyslog.d/50-default.conf, 把#cron.* 前面的#去掉即可 2）重启rsyslog服务    service rsyslog restart3) 重启cron服务       serv">
+<meta property="og:updated_time" content="2018-01-07T02:45:26.608Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="将南">
-<meta name="twitter:description" content="ubuntu启用crontab日志记录crontab日志位置        /var/log目录下的cron.log若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启1）修改rsyslog文件vim /etc/rsyslog.d/50-default.conf, 把#cron.* 前面的#去掉即可 2）重启rsyslog服务    service rsyslog restart3)">
+<meta name="twitter:title" content="Ubuntu启用crontab日志记录">
+<meta name="twitter:description" content="crontab日志位置        /var/log目录下的cron.log若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启1）修改rsyslog文件vim /etc/rsyslog.d/50-default.conf, 把#cron.* 前面的#去掉即可 2）重启rsyslog服务    service rsyslog restart3) 重启cron服务       serv">
 
 
 
@@ -128,7 +128,7 @@
 
 
 
-  <title> | 将南</title>
+  <title>Ubuntu启用crontab日志记录 | 将南</title>
   
 
 
@@ -252,7 +252,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">Ubuntu启用crontab日志记录</h1>
         
 
         <div class="post-meta">
@@ -302,8 +302,7 @@
       
 
       
-        <hr>
-<h2 id="ubuntu启用crontab日志记录"><a href="#ubuntu启用crontab日志记录" class="headerlink" title="ubuntu启用crontab日志记录"></a>ubuntu启用crontab日志记录</h2><h3 id="crontab日志位置-var-log目录下的cron-log"><a href="#crontab日志位置-var-log目录下的cron-log" class="headerlink" title="crontab日志位置        /var/log目录下的cron.log"></a>crontab日志位置        <code>/var/log</code>目录下的cron.log</h3><h2 id="若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启"><a href="#若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启" class="headerlink" title="若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启"></a>若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启</h2><h4 id="1）修改rsyslog文件"><a href="#1）修改rsyslog文件" class="headerlink" title="1）修改rsyslog文件"></a>1）修改rsyslog文件</h4><p><code>vim /etc/rsyslog.d/50-default.conf</code>, 把<code>#cron.*</code> 前面的#去掉即可</p>
+        <h3 id="crontab日志位置-var-log目录下的cron-log"><a href="#crontab日志位置-var-log目录下的cron-log" class="headerlink" title="crontab日志位置        /var/log目录下的cron.log"></a>crontab日志位置        <code>/var/log</code>目录下的cron.log</h3><h2 id="若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启"><a href="#若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启" class="headerlink" title="若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启"></a>若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启</h2><h4 id="1）修改rsyslog文件"><a href="#1）修改rsyslog文件" class="headerlink" title="1）修改rsyslog文件"></a>1）修改rsyslog文件</h4><p><code>vim /etc/rsyslog.d/50-default.conf</code>, 把<code>#cron.*</code> 前面的#去掉即可</p>
 <h4 id="2）重启rsyslog服务-service-rsyslog-restart"><a href="#2）重启rsyslog服务-service-rsyslog-restart" class="headerlink" title="2）重启rsyslog服务    service rsyslog restart"></a>2）重启rsyslog服务    <code>service rsyslog restart</code></h4><h4 id="3-重启cron服务-service-cron-restart"><a href="#3-重启cron服务-service-cron-restart" class="headerlink" title="3) 重启cron服务       service cron restart"></a>3) 重启cron服务       <code>service cron restart</code></h4><p>这样就可以在<code>/var/log</code>目录下生成cron.log文件。</p>
 
       
@@ -453,7 +452,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ubuntu启用crontab日志记录"><span class="nav-number">1.</span> <span class="nav-text">ubuntu启用crontab日志记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#crontab日志位置-var-log目录下的cron-log"><span class="nav-number">1.1.</span> <span class="nav-text">crontab日志位置        /var/log目录下的cron.log</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启"><span class="nav-number">2.</span> <span class="nav-text">若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1）修改rsyslog文件"><span class="nav-number">2.0.1.</span> <span class="nav-text">1）修改rsyslog文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2）重启rsyslog服务-service-rsyslog-restart"><span class="nav-number">2.0.2.</span> <span class="nav-text">2）重启rsyslog服务    service rsyslog restart</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-重启cron服务-service-cron-restart"><span class="nav-number">2.0.3.</span> <span class="nav-text">3) 重启cron服务       service cron restart</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#crontab日志位置-var-log目录下的cron-log"><span class="nav-number">1.</span> <span class="nav-text">crontab日志位置        /var/log目录下的cron.log</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启"><span class="nav-number"></span> <span class="nav-text">若在该位置有日志记录，即可直接查看，若无该日志，使用一下方法开启</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1）修改rsyslog文件"><span class="nav-number">0.1.</span> <span class="nav-text">1）修改rsyslog文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2）重启rsyslog服务-service-rsyslog-restart"><span class="nav-number">0.2.</span> <span class="nav-text">2）重启rsyslog服务    service rsyslog restart</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-重启cron服务-service-cron-restart"><span class="nav-number">0.3.</span> <span class="nav-text">3) 重启cron服务       service cron restart</span></a></li></ol></li></ol></div>
             
 
           </div>
