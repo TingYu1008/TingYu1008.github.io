@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="===========================  转载自简书  利用Python机器学习框架scikit-learn，我们自己做一个分类模型，对中文评论信息做情感分析。其中还会介绍中文停用词的处理方法。  疑惑前些日子，我在微信后台收到了一则读者的留言。  我一下子有些懵——这怎么还带点播了呢？ 但是旋即我醒悟过来，好像是我自己之前挖了个坑。 之前我写过《 如何用Python从海量文本抽取">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Python和机器学习训练中文文本情感分类模型？">
+<meta property="og:url" content="http://yoursite.com/2019/01/17/文本分类/index.html">
+<meta property="og:site_name" content="将南">
+<meta property="og:description" content="===========================  转载自简书  利用Python机器学习框架scikit-learn，我们自己做一个分类模型，对中文评论信息做情感分析。其中还会介绍中文停用词的处理方法。  疑惑前些日子，我在微信后台收到了一则读者的留言。  我一下子有些懵——这怎么还带点播了呢？ 但是旋即我醒悟过来，好像是我自己之前挖了个坑。 之前我写过《 如何用Python从海量文本抽取">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/64542-419e6d4d081d80f7..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/950/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/64542-4e4e9bcd0ba0cfe6..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/454/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/64542-27370261e8cd1a31..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/64542-1889ba0aa5e9c3a8..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/64542-92a74ee36f50d87d..jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/64542-908cfc1ac960daca..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/64542-7ea613068211343f..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/64542-72cb4b6912ef46be..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/64542-c8510de75eef1a9c..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/64542-e1a95d4b91e45274..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/64542-d1bdb645de596840..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/933/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/64542-87a2ec5574b6f0fe..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/998/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/64542-a0da407232a4c583..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/922/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/64542-0752cabfb07a962e..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/915/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/64542-7c5a1a27a8358aea..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/751/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/64542-a4643d56c6232563..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/64542-6c2ba17075ea126d..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/64542-067a55bb98a8b6f1..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/64542-463d03814085365a..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:updated_time" content="2019-01-16T16:09:45.352Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用Python和机器学习训练中文文本情感分类模型？">
+<meta name="twitter:description" content="===========================  转载自简书  利用Python机器学习框架scikit-learn，我们自己做一个分类模型，对中文评论信息做情感分析。其中还会介绍中文停用词的处理方法。  疑惑前些日子，我在微信后台收到了一则读者的留言。  我一下子有些懵——这怎么还带点播了呢？ 但是旋即我醒悟过来，好像是我自己之前挖了个坑。 之前我写过《 如何用Python从海量文本抽取">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/64542-419e6d4d081d80f7..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/950/format/webp">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/17/文本分类/"/>
+
+
+
+
+
+  <title>用Python和机器学习训练中文文本情感分类模型？ | 将南</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">将南</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/17/文本分类/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="将南">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="将南">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">用Python和机器学习训练中文文本情感分类模型？</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-17T00:09:22+08:00">
+                2019-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>===========================</p>
+<blockquote>
+<p>转载自<a href="https://www.jianshu.com/p/29aa3ad63f9d" target="_blank" rel="noopener">简书</a></p>
+</blockquote>
+<p>利用Python机器学习框架scikit-learn，我们自己做一个分类模型，对中文评论信息做情感分析。其中还会介绍中文停用词的处理方法。</p>
+<p><img src="//upload-images.jianshu.io/upload_images/64542-419e6d4d081d80f7..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/950/format/webp" alt=""></p>
+<h1 id="疑惑"><a href="#疑惑" class="headerlink" title="疑惑"></a>疑惑</h1><p>前些日子，我在微信后台收到了一则读者的留言。</p>
+<p><img src="//upload-images.jianshu.io/upload_images/64542-4e4e9bcd0ba0cfe6..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/454/format/webp" alt=""></p>
+<p>我一下子有些懵——这怎么还带点播了呢？</p>
+<p>但是旋即我醒悟过来，好像是我自己之前挖了个坑。</p>
+<p>之前我写过《 <a href="https://www.jianshu.com/p/fdde9fc03f94" target="_blank" rel="noopener">如何用Python从海量文本抽取主题？</a> 》一文，其中有这么一段：</p>
+<blockquote>
+<p>为了演示的流畅，我们这里忽略了许多细节。很多内容使用的是预置默认参数，而且完全忽略了中文停用词设置环节，因此“这个”、“如果”、“可能”、“就是”这样的停用词才会大摇大摆地出现在结果中。不过没有关系，完成比完美重要得多。知道了问题所在，后面改进起来很容易。<strong>有机会我会写文章介绍如何加入中文停用词的去除环节。</strong></p>
+</blockquote>
+<p>根据“自己挖坑自己填”的法则，我决定把这一部分写出来。</p>
+<p>我可以使用偷懒的办法。</p>
+<p>例如在原先的教程里，更新中文停用词处理部分，打个补丁。</p>
+<p>但是，最近我发现，好像至今为止，我们的教程从来没有介绍过如何用机器学习做情感分析。</p>
+<p>你可能说，不对吧？</p>
+<p>情感分析不是讲过了吗？老师你好像讲过《 <a href="https://www.jianshu.com/p/d50a14541d01" target="_blank" rel="noopener">如何用Python做情感分析？</a> 》，《 <a href="https://www.jianshu.com/p/4ea083874df4" target="_blank" rel="noopener">如何用Python做舆情时间序列可视化？</a> 》和《 <a href="https://www.jianshu.com/p/0c782715e58a" target="_blank" rel="noopener">如何用Python和R对《权力的游戏》故事情节做情绪分析？</a> 》。</p>
+<p>你记得真清楚，提出表扬。</p>
+<p>但是请注意，之前这几篇文章中，并没有使用机器学习方法。我们只不过调用了第三方提供的文本情感分析工具而已。</p>
+<p>但是问题来了，这些第三方工具是在别的数据集上面训练出来的，未必适合你的应用场景。</p>
+<p>例如有些情感分析工具更适合分析新闻，有的更善于处理微博数据……你拿过来，却是要对店铺评论信息做分析。</p>
+<p>这就如同你自己笔记本电脑里的网页浏览器，和图书馆电子阅览室的网页浏览器，可能类型、版本完全一样。但是你用起自己的浏览器，就是比公用电脑上的舒服、高效——因为你已经根据偏好，对自己浏览器上的“书签”、“密码存储”、“稍后阅读”都做了个性化设置。</p>
+<p>咱们这篇文章，就给你讲讲如何利用Python和机器学习，自己训练模型，对中文评论数据做情感分类。</p>
+<p># 数据</p>
+<p>我的一个学生，利用爬虫抓取了大众点评网站上的数万条餐厅评论数据。</p>
+<p>这些数据在爬取时，包含了丰富的元数据类型。</p>
+<p>我从中抽取了评论文本和评星（1-5星），用于本文的演示。</p>
+<p>从这些数据里，我们随机筛选评星为1，2，4，5的，各500条评论数据。一共2000条。</p>
+<p>为什么只甩下评星数量为3的没有选择？</p>
+<p>你先思考10秒钟，然后往下看，核对答案。</p>
+<p>答案是这样的：</p>
+<p>因为我们只希望对情感做出（正和负）二元分类，4和5星可以看作正向情感，1和2是负向情感……3怎么算？</p>
+<p>所以，为了避免这种边界不清晰造成的混淆，咱们只好把标为3星的内容丢弃掉了。</p>
+<p>整理好之后的评论数据，如下图所示。</p>
+<p><img src="//upload-images.jianshu.io/upload_images/64542-27370261e8cd1a31..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt=""></p>
+<p>我已经把数据放到了演示文件夹压缩包里面。后文会给你提供下载路径。</p>
+<h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1><p>使用机器学习的时候，你会遇到模型的选择问题。</p>
+<p>例如，许多模型都可以用来处理分类问题。逻辑回归、决策树、SVM、朴素贝叶斯……具体到咱们的评论信息情感分类问题，该用哪一种呢？</p>
+<p>幸好，Python上的机器学习工具包 scikit-learn 不仅给我们提供了方便的接口，供我们调用，而且还非常贴心地帮我们做了小抄（cheat-sheet）。</p>
+<p><img src="//upload-images.jianshu.io/upload_images/64542-1889ba0aa5e9c3a8..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt=""></p>
+<p>这张图看似密密麻麻，非常混乱，实际上是一个非常好的迷宫指南。其中绿色的方框，是各种机器学习模型。而蓝色的圆圈，是你做判断的地方。</p>
+<p>你看，咱们要处理类别问题，对吧？</p>
+<p>顺着往下看，会要求你判断数据是否有标记。我们有啊。</p>
+<p>继续往下走，数据小于100K吗？</p>
+<p>考虑一下，我们的数据有2000条，小于这个阈值。</p>
+<p>接下来问是不是文本数据？是啊。</p>
+<p>于是路径到了终点。</p>
+<p>Scikit-learn告诉我们：用朴素贝叶斯模型好了。</p>
+<p>小抄都做得如此照顾用户需求，你对scikit-learn的品质应该有个预期了吧？如果你需要使用经典机器学习模型（你可以理解成深度学习之外的所有模型），我推荐你先尝试scikit-learn 。</p>
+<h1 id="向量化"><a href="#向量化" class="headerlink" title="向量化"></a>向量化</h1><p>《 <a href="https://www.jianshu.com/p/fdde9fc03f94" target="_blank" rel="noopener">如何用Python从海量文本抽取主题？</a> 》一文里，我们讲过自然语言处理时的向量化。</p>
+<p>忘了？</p>
+<p>没关系。</p>
+<p>子曰：</p>
+<blockquote>
+<p>学而时习之，不亦乐乎？</p>
+</blockquote>
+<p>这里咱们复习一下。</p>
+<p>对自然语言文本做向量化（vectorization）的主要原因，是计算机<strong>看不懂</strong>自然语言。</p>
+<p>计算机，顾名思义，就是用来算数的。文本对于它（至少到今天）没有真正的意义。</p>
+<p>但是自然语言的处理，是一个重要问题，也需要自动化的支持。因此人就得想办法，让机器能尽量理解和表示人类的语言。</p>
+<p>假如这里有两句话：</p>
+<p>I love the game.</p>
+<p>I hate the game.</p>
+<p>那么我们就可以简单粗暴地抽取出以下特征（其实就是把所有的单词都罗列一遍）：</p>
+<ul>
+<li>I</li>
+<li>love</li>
+<li>hate</li>
+<li>the</li>
+<li>game</li>
+</ul>
+<p>对每一句话，都分别计算特征出现个数。于是上面两句话就转换为以下表格：</p>
+<p><img src="//upload-images.jianshu.io/upload_images/64542-92a74ee36f50d87d..jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700/format/webp" alt=""></p>
+<p>按照句子为单位，从左到右读数字，第一句表示为[1, 1, 0, 1, 1]，第二句就成了[1, 0, 1, 1, 1]。</p>
+<p>这就叫向量化。</p>
+<p>这个例子里面，特征的数量叫做维度。于是向量化之后的这两句话，都有5个维度。</p>
+<p>你一定要记住，此时机器依然不能理解两句话的具体含义。但是它已经尽量在用一种有意义的方式来表达它们。</p>
+<p>注意这里我们使用的，叫做“一袋子词”（bag of words）模型。</p>
+<p>下面这张图（来自 <a href="https://goo.gl/2jJ9Kp" target="_blank" rel="noopener">https://goo.gl/2jJ9Kp</a> ），形象化表示出这个模型的含义。</p>
+<p><img src="//upload-images.jianshu.io/upload_images/64542-908cfc1ac960daca..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt=""></p>
+<p>一袋子词模型不考虑词语的出现顺序，也不考虑词语和前后词语之间的连接。每个词都被当作一个独立的特征来看待。</p>
+<p>你可能会问：“这样不是很不精确吗？充分考虑顺序和上下文联系，不是更好吗？”</p>
+<p>没错，你对文本的顺序、结构考虑得越周全，模型可以获得的信息就越多。</p>
+<p>但是，凡事都有成本。只需要用基础的排列组合知识，你就能计算出独立考虑单词，和考虑连续n个词语（称作 n-gram），造成的模型维度差异了。</p>
+<p>为了简单起见，咱们这里还是先用一袋子词吧。有空我再给你讲讲……</p>
+<p>打住，不能再挖坑了。</p>
+<h1 id="中文"><a href="#中文" class="headerlink" title="中文"></a>中文</h1><p>上一节咱们介绍的，是自然语言向量化处理的通则。</p>
+<p>处理中文的时候，要更加麻烦一些。</p>
+<p>因为不同于英文、法文等拉丁语系文字，中文天然<strong>没有</strong>空格作为词语之间的分割符号。</p>
+<p>我们要先将中文分割成空格连接的词语。</p>
+<p>例如把：</p>
+<p>“我喜欢这个游戏”</p>
+<p>变成：</p>
+<p>“我 喜欢 这个 游戏”</p>
+<p>这样一来，就可以仿照英文句子的向量化，来做中文的向量化了。</p>
+<p>你可能担心计算机处理起中文的词语，跟处理英文词语有所不同。</p>
+<p>这种担心没必要。</p>
+<p>因为咱们前面讲过，计算机其实连英文单词也看不懂。</p>
+<p>在它眼里，不论什么自然语言的词汇，都只是某种特定组合的字符串而已。<br>不论处理中文还是英文，都需要处理的一种词汇，叫做停用词。</p>
+<p>中文维基百科里，是这么定义停用词的：</p>
+<blockquote>
+<p>在信息检索中，为节省存储空间和提高搜索效率，在处理自然语言数据（或文本）之前或之后会自动过滤掉某些字或词，这些字或词即被称为Stop Words(停用词)。</p>
+</blockquote>
+<p>咱们做的，不是信息检索，而已文本分类。</p>
+<p>对咱们来说，你不打算拿它做特征的单词，就可以当作停用词。</p>
+<p>还是举刚才英文的例子，下面两句话：</p>
+<p>I love the game.</p>
+<p>I hate the game.</p>
+<p>告诉我，哪些是停用词？</p>
+<p>直觉会告诉你，定冠词 the 应该是。</p>
+<p>没错，它是虚词，没有什么特殊意义。</p>
+<p>它在哪儿出现，都是一个意思。</p>
+<p>一段文字里，出现很多次定冠词都很正常。把它和那些包含信息更丰富的词汇（例如love, hate）放在一起统计，就容易干扰我们把握文本的特征。</p>
+<p>所以，咱们把它当作停用词，从特征里面剔除出去。</p>
+<p>举一反三，你会发现分词后的中文语句：</p>
+<p>“我 喜欢 这个 游戏”</p>
+<p>其中的“这个”应该也是停用词吧？</p>
+<p>答对了！</p>
+<p>要处理停用词，怎么办呢？当然你可以一个个手工来寻找，但是那显然效率太低。</p>
+<p>有的机构或者团队处理过许多停用词。他们会发现，某种语言里，停用词是有规律的。</p>
+<p>他们把常见的停用词总结出来，汇集成表格。以后只需要查表格，做处理，就可以利用先前的经验和知识，提升效率，节约时间。</p>
+<p>在scikit-learn中，英语停用词是自带的。只需要指定语言为英文，机器会帮助你自动处理它们。</p>
+<p>但是中文……</p>
+<p>scikit-learn开发团队里，大概缺少足够多的中文使用者吧。</p>
+<p>好消息是，你可以使用第三方共享的停用词表。</p>
+<p>这种停用词表到哪里下载呢？</p>
+<p>我已经帮你找到了 <a href="https://github.com/chdd/weibo/tree/master/stopwords" target="_blank" rel="noopener">一个 github 项目</a> ，里面包含了4种停用词表，来自哈工大、四川大学和百度等自然语言处理方面的权威单位。</p>
+<p>这几个停用词表文件长度不同，内容也差异很大。为了演示的方便与一致性，咱们统一先用哈工大这个停用词表吧。</p>
+<p><img src="//upload-images.jianshu.io/upload_images/64542-7ea613068211343f..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt=""></p>
+<p>我已经将其一并存储到了演示目录压缩包中，供你下载。<br># 环境  </p>
+<p>请你先到 <a href="https://github.com/wshuyi/demo-chinese-vectorization-stop-words/archive/master.zip" target="_blank" rel="noopener">这个网址</a> 下载本教程配套的压缩包。</p>
+<p>下载后解压，你会在生成的目录里面看到以下4个文件。</p>
+<p><img src="//upload-images.jianshu.io/upload_images/64542-72cb4b6912ef46be..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt=""></p>
+<p>下文中，我们会把这个目录称为“演示目录”。</p>
+<p>请一定注意记好它的位置哦。</p>
+<p>要装Python，最简便办法是安装Anaconda套装。</p>
+<p>请到 <a href="https://www.anaconda.com/download/" target="_blank" rel="noopener">这个网址</a> 下载Anaconda的最新版本。</p>
+<p><img src="//upload-images.jianshu.io/upload_images/64542-c8510de75eef1a9c..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt=""></p>
+<p>请选择左侧的 Python <strong>3.6</strong> 版本下载安装。</p>
+<p>如果你需要具体的步骤指导，或者想知道Windows平台如何安装并运行Anaconda命令，请参考我为你准备的 <a href="https://www.jianshu.com/p/772740d57576" target="_blank" rel="noopener">视频教程</a> 。</p>
+<p>打开终端，用cd命令进入<strong>演示目录</strong>。如果你不了解具体使用方法，也可以参考 <a href="https://www.jianshu.com/p/772740d57576" target="_blank" rel="noopener">视频教程</a> 。<br>我们需要使用许多软件包。如果每一个都手动安装，会非常麻烦。</p>
+<p>我帮你做了个虚拟环境的配置文件，叫做environment.yaml ，也放在演示目录中。</p>
+<p>请你首先执行以下命令：</p>
+<p>conda env create -f environment.yaml</p>
+<p>这样，所需的软件包就一次性安装完毕了。</p>
+<p>之后执行，</p>
+<p>source activate datapy3</p>
+<p>进入这个虚拟环境。</p>
+<p>注意一定要执行下面这句：</p>
+<p>python -m ipykernel install –user –name=datapy3</p>
+<p>只有这样，当前的Python环境才会作为核心（kernel）在系统中注册。<br>确认你的电脑上已经安装了 Google Chrome 浏览器。如果没有安装请到这里 <a href="http://dl.pconline.com.cn/download/51614.html" target="_blank" rel="noopener">下载</a> 安装。</p>
+<p>之后，在演示目录中，我们执行：</p>
+<p>jupyter notebook</p>
+<p>Google Chrome会开启，并启动 Jupyter 笔记本界面：</p>
+<p><img src="//upload-images.jianshu.io/upload_images/64542-e1a95d4b91e45274..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt=""></p>
+<p>你可以直接点击文件列表中的demo.ipynb文件，可以看到本教程的全部示例代码。</p>
+<p>你可以一边看教程的讲解，一边依次执行这些代码。</p>
+<p>但是，我<strong>建议</strong>的方法，是回到主界面下，新建一个新的空白 Python 3 （显示名称为datapy3的那个）笔记本。</p>
+<p>请跟着教程，一个个字符输入相应的内容。这可以帮助你更为深刻地理解代码的含义，更高效地把技能内化。</p>
+<p>准备工作结束，下面我们开始正式输入代码。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>我们读入数据框处理工具pandas。</p>
+<pre><code>import pandas as pd
+</code></pre><p>利用pandas的csv读取功能，把数据读入。</p>
+<p>注意为了与Excel和系统环境设置的兼容性，该csv数据文件采用的编码为GB18030。这里需要显式指定，否则会报错。</p>
+<pre><code>df = pd.read_csv(&apos;data.csv&apos;, encoding=&apos;gb18030&apos;)
+</code></pre><p>我们看看读入是否正确。</p>
+<pre><code>df.head()
+</code></pre><p>前5行内容如下：</p>
+<p><img src="//upload-images.jianshu.io/upload_images/64542-d1bdb645de596840..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/933/format/webp" alt=""></p>
+<p>看看数据框整体的形状是怎么样的：</p>
+<pre><code>df.shape
+
+
+(2000, 2)
+</code></pre><p>我们的数据一共2000行，2列。完整读入。</p>
+<p>我们并不准备把情感分析的结果分成4个类别。我们只打算分成正向和负向。</p>
+<p>这里我们用一个无名函数来把评星数量&gt;3的，当成正向情感，取值为1；反之视作负向情感，取值为0。</p>
+<pre><code>def make_label(df):
+    df[&quot;sentiment&quot;] = df[&quot;star&quot;].apply(lambda x: 1 if x&gt;3 else 0)
+</code></pre><p>编制好函数之后，我们实际运行在数据框上面。</p>
+<pre><code>make_label(df)
+</code></pre><p>看看结果：</p>
+<pre><code>df.head()
+</code></pre><p><img src="//upload-images.jianshu.io/upload_images/64542-87a2ec5574b6f0fe..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/998/format/webp" alt=""></p>
+<p>从前5行看来，情感取值就是根据我们设定的规则，从评星数量转化而来。</p>
+<p>下面我们把特征和标签拆开。</p>
+<pre><code>X = df[[&apos;comment&apos;]]
+y = df.sentiment
+</code></pre><p>X 是我们的全部特征。因为我们只用文本判断情感，所以X实际上只有1列。</p>
+<pre><code>X.shape
+
+
+(2000, 1)
+</code></pre><p>而y是对应的标记数据。它也是只有1列。</p>
+<pre><code>y.shape
+
+
+(2000,)
+</code></pre><p>我们来看看 X 的前几行数据。</p>
+<pre><code>X.head()
+</code></pre><p><img src="//upload-images.jianshu.io/upload_images/64542-a0da407232a4c583..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/922/format/webp" alt=""></p>
+<p>注意这里评论数据还是原始信息。词语没有进行拆分。</p>
+<p>为了做特征向量化，下面我们利用结巴分词工具来拆分句子为词语。</p>
+<pre><code>import jieba
+</code></pre><p>我们建立一个辅助函数，把结巴分词的结果用空格连接。</p>
+<p>这样分词后的结果就如同一个英文句子一样，单次之间依靠空格分割。</p>
+<pre><code>def chinese_word_cut(mytext):
+    return &quot; &quot;.join(jieba.cut(mytext))
+</code></pre><p>有了这个函数，我们就可以使用 apply 命令，把每一行的评论数据都进行分词。</p>
+<pre><code>X[&apos;cutted_comment&apos;] = X.comment.apply(chinese_word_cut)
+</code></pre><p>我们看看分词后的效果：</p>
+<pre><code>X.cutted_comment[:5]
+</code></pre><p><img src="//upload-images.jianshu.io/upload_images/64542-0752cabfb07a962e..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/915/format/webp" alt=""></p>
+<p>单词和标点之间都用空格分割，符合我们的要求。</p>
+<p>下面就是机器学习的常规步骤了：我们需要把数据分成训练集和测试集。</p>
+<p>为什么要拆分数据集合？</p>
+<p>在《<a href="https://www.jianshu.com/p/67a71e366516" target="_blank" rel="noopener">贷还是不贷：如何用Python和机器学习帮你决策？</a>》一文中，我已解释过，这里复习一下：</p>
+<blockquote>
+<p>如果期末考试之前，老师给你一套试题和答案，你把它背了下来。然后考试的时候，只是从那套试题里面抽取一部分考。你凭借超人的记忆力获得了100分。请问你学会了这门课的知识了吗？不知道如果给你新的题目，你会不会做呢？答案还是不知道。所以考试题目需要和复习题目有区别。</p>
+</blockquote>
+<p>同样的道理，假设咱们的模型只在某个数据集上训练，准确度非常高，但是从来没有见过其他新数据，那么它面对新数据表现如何呢？</p>
+<p>你心里也没底吧？</p>
+<p>所以我们需要把数据集拆开，只在训练集上训练。保留测试集先不用，作为考试题，看模型经过训练后的分类效果。</p>
+<pre><code>from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=1)
+</code></pre><p>这里，我们设定了 <code>random_state</code> 取值，这是为了在不同环境中，保证随机数取值一致，以便验证咱们模型的实际效果。</p>
+<p>我们看看此时的 <code>X_train</code> 数据集形状。</p>
+<pre><code>X_train.shape
+
+
+(1500, 2)
+</code></pre><p>可见，在默认模式下，<code>train_test_split</code>函数对训练集和测试集的划分比例为 3:1。</p>
+<p>我们检验一下其他3个集合看看：</p>
+<pre><code>y_train.shape
+
+
+(1500,)
+
+
+X_test.shape
+
+
+(500, 2)
+
+
+y_test.shape
+
+
+(500,)
+</code></pre><p>同样都正确无误。</p>
+<p>下面我们就要处理中文停用词了。</p>
+<p>我们编写一个函数，从中文停用词表里面，把停用词作为列表格式保存并返回：</p>
+<pre><code>def get_custom_stopwords(stop_words_file):
+    with open(stop_words_file) as f:
+        stopwords = f.read()
+    stopwords_list = stopwords.split(&apos;\n&apos;)
+    custom_stopwords_list = [i for i in stopwords_list]
+    return custom_stopwords_list
+</code></pre><p>我们指定使用的停用词表，为我们已经下载保存好的哈工大停用词表文件。</p>
+<pre><code>stop_words_file = &quot;stopwordsHIT.txt&quot;
+stopwords = get_custom_stopwords(stop_words_file)
+</code></pre><p>看看我们的停用词列表的后10项：</p>
+<pre><code>stopwords[-10:]
+</code></pre><p><img src="//upload-images.jianshu.io/upload_images/64542-7c5a1a27a8358aea..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/751/format/webp" alt=""></p>
+<p>这些大部分都是语气助词，作为停用词去除掉，不会影响到语句的实质含义。</p>
+<p>下面我们就要尝试对分词后的中文语句做向量化了。</p>
+<p>我们读入<code>CountVectorizer</code>向量化工具，它依据词语出现频率转化向量。</p>
+<pre><code>from sklearn.feature_extraction.text import CountVectorizer
+</code></pre><p>我们建立一个<code>CountVectorizer()</code>的实例，起名叫做vect。</p>
+<p>注意这里为了说明停用词的作用。我们先使用默认参数建立vect。</p>
+<pre><code>vect = CountVectorizer()
+</code></pre><p>然后我们用向量化工具转换已经分词的训练集语句，并且将其转化为一个数据框，起名为<code>term_matrix</code>。</p>
+<pre><code>term_matrix = pd.DataFrame(vect.fit_transform(X_train.cutted_comment).toarray(), columns=vect.get_feature_names())
+</code></pre><p>我们看看<code>term_matrix</code>的前5行：</p>
+<pre><code>term_matrix.head()
+</code></pre><p><img src="//upload-images.jianshu.io/upload_images/64542-a4643d56c6232563..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt=""></p>
+<p>我们注意到，特征词语五花八门，特别是很多数字都被当作特征放在了这里。</p>
+<p><code>term_matrix</code>的形状如下：</p>
+<pre><code>term_matrix.shape
+
+
+(1500, 7305)
+</code></pre><p>行数没错，列数就是特征个数，有7305个。</p>
+<p>下面我们测试一下，加上停用词去除功能，特征向量的转化结果会有什么变化。</p>
+<pre><code>vect = CountVectorizer(stop_words=frozenset(stopwords))
+</code></pre><p>下面的语句跟刚才一样：</p>
+<pre><code>term_matrix = pd.DataFrame(vect.fit_transform(X_train.cutted_comment).toarray(), columns=vect.get_feature_names())
+
+
+term_matrix.head()
+</code></pre><p><img src="//upload-images.jianshu.io/upload_images/64542-6c2ba17075ea126d..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt=""></p>
+<p>可以看到，此时特征个数从刚才的7305个，降低为7144个。我们没有调整任何其他的参数，因此减少的161个特征，就是出现在停用词表中的单词。</p>
+<p>但是，这种停用词表的写法，依然会漏掉不少漏网之鱼。</p>
+<p>首先就是前面那一堆显眼的数字。它们在此处作为特征毫无道理。如果没有单位，没有上下文，数字都是没有意义的。</p>
+<p>因此我们需要设定，数字不能作为特征。</p>
+<p>在Python里面，我们可以设定<code>token_pattern</code>来完成这个目标。</p>
+<p>这一部分需要用到正则表达式的知识，我们这里无法详细展开了。</p>
+<p>但如果你只是需要去掉数字作为特征的话，按照我这样写，就可以了。</p>
+<p>另一个问题在于，我们看到这个矩阵，实际上是个非常稀疏的矩阵，其中大部分的取值都是0.</p>
+<p>这没有关系，也很正常。</p>
+<p>毕竟大部分评论语句当中只有几个到几十个词语而已。7000多的特征，单个语句显然是覆盖不过来的。</p>
+<p>然而，有些词汇作为特征，就值得注意了。</p>
+<p>首先是那些过于普遍的词汇。尽管我们用了停用词表，但是难免有些词汇几乎出现在每一句评论里。什么叫做特征？特征就是可以把一个事物与其他事物区别开的属性。</p>
+<p>假设让你描述今天见到的印象最深刻的人。你怎么描述？</p>
+<blockquote>
+<p>我看见他穿着小丑的衣服，在繁华的商业街踩高跷，一边走还一边抛球，和路人打招呼。</p>
+</blockquote>
+<p>还是……</p>
+<blockquote>
+<p>我看见他有两只眼睛，一只鼻子。</p>
+</blockquote>
+<p>后者绝对不算是好的特征描述，因为难以把你要描述的个体区分出来。</p>
+<p>物极必反，那些过于特殊的词汇，其实也不应该保留。因为你了解了这个特征之后，对你的模型处理新的语句情感判断，几乎都用不上。</p>
+<p>这就如同你跟着神仙学了屠龙之术，然而之后一辈子也没有见过龙……</p>
+<p>所以，如下面两个代码段所示，我们一共多设置了3层特征词汇过滤。</p>
+<pre><code>max_df = 0.8 # 在超过这一比例的文档中出现的关键词（过于平凡），去除掉。
+min_df = 3 # 在低于这一数量的文档中出现的关键词（过于独特），去除掉。
+
+
+vect = CountVectorizer(max_df = max_df,
+                       min_df = min_df,
+                       token_pattern=u&apos;(?u)\\b[^\\d\\W]\\w+\\b&apos;,
+                       stop_words=frozenset(stopwords))
+</code></pre><p>这时候，再运行我们之前的语句，看看效果。</p>
+<pre><code>term_matrix = pd.DataFrame(vect.fit_transform(X_train.cutted_comment).toarray(), columns=vect.get_feature_names())
+
+
+term_matrix.head()
+</code></pre><p><img src="//upload-images.jianshu.io/upload_images/64542-067a55bb98a8b6f1..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt=""></p>
+<p>可以看到，那些数字全都不见了。特征数量从单一词表法去除停用词之后的7144个，变成了1864个。</p>
+<p>你可能会觉得，太可惜了吧？好容易分出来的词，就这么扔了？</p>
+<p>要知道，特征多，绝不一定是好事儿。</p>
+<p>尤其是噪声大量混入时，会显著影响你模型的效能。</p>
+<p>好了，评论数据训练集已经特征向量化了。下面我们要利用生成的特征矩阵来训练模型了。</p>
+<p>我们的分类模型，采用朴素贝叶斯（Multinomial naive bayes）。</p>
+<pre><code>from sklearn.naive_bayes import MultinomialNB
+nb = MultinomialNB()
+</code></pre><p>注意我们的数据处理流程是这样的：</p>
+<ol>
+<li>特征向量化；</li>
+<li>朴素贝叶斯分类。</li>
+</ol>
+<p>如果每次修改一个参数，或者换用测试集，我们都需要重新运行这么多的函数，肯定是一件效率不高，且令人头疼的事儿。而且只要一复杂，出现错误的几率就会增加。</p>
+<p>幸好，Scikit-learn给我们提供了一个功能，叫做管道(pipeline)，可以方便解决这个问题。</p>
+<p>它可以帮助我们，把这些顺序工作连接起来，隐藏其中的功能顺序关联，从外部一次调用，就能完成顺序定义的全部工作。</p>
+<p>使用很简单，我们就把 vect 和 nb 串联起来，叫做pipe。</p>
+<pre><code>from sklearn.pipeline import make_pipeline
+pipe = make_pipeline(vect, nb)
+</code></pre><p>看看它都包含什么步骤：</p>
+<pre><code>pipe.steps
+</code></pre><p><img src="//upload-images.jianshu.io/upload_images/64542-463d03814085365a..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt=""></p>
+<p>看，我们刚才做的工作，都在管道里面了。我们可以把管道当成一个整体模型来调用。</p>
+<p>下面一行语句，就可以把未经特征向量化的训练集内容输入，做交叉验证，算出模型分类准确率的均值。</p>
+<pre><code>from sklearn.cross_validation import cross_val_score
+cross_val_score(pipe, X_train.cutted_comment, y_train, cv=5, scoring=&apos;accuracy&apos;).mean()
+</code></pre><p>咱们的模型在训练中的准确率如何呢？</p>
+<pre><code>0.820687244673089
+</code></pre><p>这个结果，还是不错的。</p>
+<p>回忆一下，总体的正向和负向情感，各占了数据集的一半。</p>
+<p>如果我们建立一个“笨模型”（dummy model），即所有的评论，都当成正向（或者负向）情感，准确率多少？</p>
+<p>对，50%。</p>
+<p>目前的模型准确率，远远超出这个数值。超出的这30%多，其实就是评论信息为模型带来的确定性。</p>
+<p>但是，不要忘了，我们不能光拿训练集来说事儿，对吧？下面咱们给模型来个考试。</p>
+<p>我们用训练集，把模型拟合出来。</p>
+<pre><code>pipe.fit(X_train.cutted_comment, y_train)
+</code></pre><p>然后，我们在测试集上，对情感分类标记进行预测。</p>
+<pre><code>pipe.predict(X_test.cutted_comment)
+</code></pre><p>这一大串0和1，你看得是否眼花缭乱？</p>
+<p>没关系，scikit-learn给我们提供了非常多的模型性能测度工具。</p>
+<p>我们先把预测结果保存到<code>y_pred</code>。</p>
+<pre><code>y_pred = pipe.predict(X_test.cutted_comment)
+</code></pre><p>读入 scikit-learn 的测量工具集。</p>
+<pre><code>from sklearn import metrics
+</code></pre><p>我们先来看看测试准确率：</p>
+<pre><code>metrics.accuracy_score(y_test, y_pred)
+
+
+0.86
+</code></pre><p>这个结果是不是让你很吃惊？没错，模型面对没有见到的数据，居然有如此高的情感分类准确性。</p>
+<p>对于分类问题，光看准确率有些不全面，咱们来看看混淆矩阵。</p>
+<pre><code>metrics.confusion_matrix(y_test, y_pred)
+
+
+array([[194,  43],
+       [ 27, 236]])
+</code></pre><p>混淆矩阵中的4个数字，分别代表：</p>
+<ul>
+<li>TP: 本来是正向，预测也是正向的；</li>
+<li>FP: 本来是负向，预测却是正向的；</li>
+<li>FN: 本来是正向，预测却是负向的；</li>
+<li>TN: 本来是负向，预测也是负向的。</li>
+</ul>
+<p>下面这张图（来自 <a href="https://goo.gl/5cYGZd" target="_blank" rel="noopener">https://goo.gl/5cYGZd</a> ）应该能让你更为清晰理解混淆矩阵的含义：</p>
+<p>写到这儿，你大概能明白咱们模型的性能了。</p>
+<p>但是总不能只把咱们训练出的模型和无脑“笨模型”去对比吧？这也太不公平了！</p>
+<p>下面，我们把老朋友 SnowNLP 呼唤出来，做个对比。</p>
+<p>如果你把它给忘了，请复习《<a href="https://www.jianshu.com/p/d50a14541d01" target="_blank" rel="noopener">如何用Python做情感分析？</a>》</p>
+<pre><code>from snownlp import SnowNLP
+def get_sentiment(text):
+    return SnowNLP(text).sentiments
+</code></pre><p>我们利用测试集评论原始数据，让 SnowNLP 跑一遍，获得结果。</p>
+<pre><code>y_pred_snownlp = X_test.comment.apply(get_sentiment)
+</code></pre><p>注意这里有个小问题。 SnowNLP 生成的结果，不是0和1，而是0到1之间的小数。所以我们需要做一步转换，把0.5以上的结果当作正向，其余当作负向。</p>
+<pre><code>y_pred_snownlp_normalized = y_pred_snownlp.apply(lambda x: 1 if x&gt;0.5 else 0)
+</code></pre><p>看看转换后的前5条 SnowNLP 预测结果：</p>
+<pre><code>y_pred_snownlp_normalized[:5]
+</code></pre><p>好了，符合我们的要求。</p>
+<p>下面我们先看模型分类准确率：</p>
+<pre><code>metrics.accuracy_score(y_test, y_pred_snownlp_normalized)
+
+
+0.77
+</code></pre><p>与之对比，咱们的测试集分类准确率，可是0.86哦。</p>
+<p>我们再来看看混淆矩阵。</p>
+<pre><code>metrics.confusion_matrix(y_test, y_pred_snownlp_normalized)
+
+
+array([[189,  48],
+       [ 67, 196]])
+</code></pre><p>对比的结果，是 TP 和 TN 两项上，咱们的模型判断正确数量，都要超出 SnowNLP。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>回顾一下，本文介绍了以下知识点：</p>
+<ol>
+<li>如何用一袋子词（bag of words）模型将自然语言语句向量化，形成特征矩阵；</li>
+<li>如何利用停用词表、词频阈值和标记模式(token pattern)移除不想干的伪特征词汇，降低模型复杂度。</li>
+<li>如何选用合适的机器学习分类模型，对词语特征矩阵做出分类；</li>
+<li>如何用管道模式，归并和简化机器学习步骤流程；</li>
+<li>如何选择合适的性能测度工具，对模型的效能进行评估和对比。</li>
+</ol>
+<p>希望这些内容能够帮助你更高效地处理中文文本情感分类工作。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/17/中文文本情感分类/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">将南</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#疑惑"><span class="nav-number">1.</span> <span class="nav-text">疑惑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型"><span class="nav-number">2.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#向量化"><span class="nav-number">3.</span> <span class="nav-text">向量化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中文"><span class="nav-number">4.</span> <span class="nav-text">中文</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">5.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number">6.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">将南</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
