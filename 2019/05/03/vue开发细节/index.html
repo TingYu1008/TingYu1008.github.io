@@ -89,7 +89,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/05/03/vue开发细节/index.html">
 <meta property="og:site_name" content="将南">
 <meta property="og:description" content="Vue.js作为一个非常好用的前端框架，非常容易上手，经过初步的学习后，就可以搭建起一个应用了。下面记录一下在开发中遇到的问题，以及对应的解决办法。Q: 页面跳转后，返回前一页面，前一页面会重新加载，从后台获取数据。 A: 在App.vue中使用将需要保持长连接的页面包裹起来。 12345&amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;    &amp;lt;keep-alive&amp;gt;">
-<meta property="og:updated_time" content="2019-05-03T14:00:59.763Z">
+<meta property="og:updated_time" content="2019-05-03T14:09:17.596Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue.js 开发中的一些细节">
 <meta name="twitter:description" content="Vue.js作为一个非常好用的前端框架，非常容易上手，经过初步的学习后，就可以搭建起一个应用了。下面记录一下在开发中遇到的问题，以及对应的解决办法。Q: 页面跳转后，返回前一页面，前一页面会重新加载，从后台获取数据。 A: 在App.vue中使用将需要保持长连接的页面包裹起来。 12345&amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;    &amp;lt;keep-alive&amp;gt;">
@@ -188,7 +188,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -198,7 +198,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -262,7 +262,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-03T21:25:28+08:00">
                 2019-05-03
@@ -310,9 +310,9 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//在页面离开时记录滚动位置</span><br><span class="line">beforeRouteLeave (to, from, next) &#123;</span><br><span class="line">    this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop</span><br><span class="line">    next()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//进入该页面时，用之前保存的滚动位置赋值</span><br><span class="line">beforeRouteEnter (to, from, next) &#123;</span><br><span class="line">    next(vm =&gt; &#123;            </span><br><span class="line">        document.body.scrollTop = vm.scrollTop</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>Q: 如何实现页面滑动到底端，自动加载下一页内容？</strong></p>
 <p><strong>A:</strong> 设置一个监听事件，对滑动的动作进行监听，然后判断是否滑动到页面底端。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">scrollBottom() &#123;</span><br><span class="line">    // 由于移动端不能通过document.documentElement.scrollTop获取到距顶端的距离，使用一个变量scrollTop获取距顶端的距离，对移动端与电脑端都适用</span><br><span class="line">    var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;</span><br><span class="line"></span><br><span class="line">    // 判断是否滑到页面底部</span><br><span class="line">    if ((window.screen.height + scrollTop) &gt;=           (document.body.clientHeight - 250) &amp;&amp; this.require &amp;&amp; (this.$route.name === &apos;smzdmHome&apos;)) &#123;            </span><br><span class="line">        this.loading = true</span><br><span class="line">        this.require = false</span><br><span class="line"></span><br><span class="line">        //获取下一页数据</span><br><span class="line">        axios.get(url).then(this.processData)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">scrollBottom() &#123;</span><br><span class="line">    // 由于移动端不能通过document.documentElement.scrollTop获取到距顶端的距离，使用一个变量scrollTop获取距顶端的距离，</span><br><span class="line">    // 对移动端与电脑端都适用</span><br><span class="line">    var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;</span><br><span class="line"></span><br><span class="line">    // 判断是否滑到页面底部</span><br><span class="line">    if ((window.screen.height + scrollTop) &gt;=(document.body.clientHeight - 250) &amp;&amp; this.require) &#123;            </span><br><span class="line">        this.loading = true</span><br><span class="line">        this.require = false</span><br><span class="line"></span><br><span class="line">        //获取下一页数据</span><br><span class="line">        axios.get(url).then(this.processData)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mounted () &#123;</span><br><span class="line">      // 添加滚动事件，检测滚动到页面底部      </span><br><span class="line">      window.addEventListener(&apos;scroll&apos;, this.scrollBottom)</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
 <p><strong>Q: 如何对v-html中的内容添加css样式？</strong></p>
-<p><strong>A:</strong> 由于组件中的css样式一般会使用scoped来修饰，只对当前组件有效，要对v-html中的内容添加样式可以使用 <code>&gt;&gt;&gt;</code> 穿越到对应class，添加css样式。</p>
+<p><strong>A:</strong> 由于组件中的css样式一般会使用scoped来修饰，只对当前组件有效，要对v-html中的内容添加样式可以使用 <code>&gt;&gt;&gt;</code> 穿越到对应部分，添加css样式。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(stylus语法)</span><br><span class="line"></span><br><span class="line">.content &gt;&gt;&gt; h1</span><br><span class="line">    font-size 20px</span><br><span class="line">.content &gt;&gt;&gt; img</span><br><span class="line">    width 100%</span><br><span class="line">    padding 15px 0</span><br></pre></td></tr></table></figure>
 <p><strong>Q: 打包后，打开index.html一片空白</strong></p>
 <p><strong>A:</strong> config文件夹下的index.js中，对build部分，把assetsPublicPath: ‘/‘ 改成assetsPublicPath: ‘./‘。【添加了一个点】</p>
@@ -413,10 +413,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -437,7 +437,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">8</span>
-                  <span class="site-state-item-name">posts</span>
+                  <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>
             
@@ -505,7 +505,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
